@@ -116,3 +116,84 @@
 # -> what actions are possible via HTTP verbs.
 # By using HTTP headers we can set various levels of authentication and permission too.
 
+
+# Chapter 2: Library Website and API
+
+# We CAN NOT build a web API with only Django Rest Framework;
+# it always MUST be added to a project AFTER Django itself has been installed and configured.
+# Django creates websites containing webpages,
+# Django REST Framework creates web APIs which are
+# a collection of URL endpoints containing available HTTP verbs that return JSON.
+
+# __init__.py -> a Python way to treat a directory as a package; it is empty
+# asgi.py -> Asynchronous Server Gateway Interface, a new option in Django 3.0+
+# settings.py -> contains all the configuration for our project
+# urls.py -> controls the top-level URL routes
+# wsgi.py -> Web Server Gateway Interface and helps Django serve the eventual web pages
+# manage.py executes various Django commands such as running the local web server or creating a new app.
+
+# First app
+# Each app has a __init__.py file identifying it as a Python package:
+# admin.py -> a configuration file for the built-in Django Admin app
+# apps.py -> a configuration file for the app itself
+# migrations/ directory -> stores migrations files for database changes
+# models.py -> where we define our database models
+# tests.py -> for our app-specific tests
+# views.py -> where we handle the request/response logic for our web app.
+# + urls.py file within each app -> for routing.
+
+# Each web page in traditional Django requires several files: a view, url, and template.
+# BUT FIRST WE NEED A DATABASE MODEL.
+
+# Models
+
+# We created a new database model -> we need to create a migration file to go along with it.
+# We could just type python manage.py makemigrations but if there were multiple apps with database changes,
+# both would be added to the migrations file which makes debugging in the future more of a challenge.
+# Keep your migrations files AS SPECIFIC AS POSSIBLE, ex. $ python manage.py makemigrations books
+
+# Admin
+
+# create a superuser account and update admin.py -> the books app is displayed
+# -> start entering data into our new model via the built-in Django app
+
+# Views
+
+# views.py file controls how the database model content is displayed.
+# make our template and configure our URLs
+
+# URLs
+
+# set up both the project-level urls.py file and then one within the books app.
+# When a user visits our site they will first interact with the config/urls.py file.
+
+# We use the empty string, '', for the books app route which means a user on the homepage will be
+# redirected directly to the books app.
+
+# The final step is to create our template file that controls the layout on the actual web page.
+
+# Ultimately, our API will expose a single endpoint that lists out all books in JSON. So we will need
+# a new URL route, a new view, and a new serializer file.
+
+# create a dedicated api app -> even if we add more apps in the future, each app can contain the
+# models, views, templates, and urls needed for dedicated webpages, but all API-specific files for
+# the entire project will live in a dedicated api app.
+
+# The api app will not have its own database models so there is no need to create a migration file
+# and run migrate to update the database.
+
+# URLs
+
+# Adding an API endpoint is just like configuring a traditional Django app’s routes.
+# First at the project-level we need to include the api app and configure its URL route.
+
+# Views
+
+# views.py file -> relies on Django REST Framework’s built-in generic class views.
+# These deliberately mimic traditional Django’s generic class-based views in format, but
+# they ARE NOT THE SAME THING.
+
+# cURL
+
+# Browsable API
+

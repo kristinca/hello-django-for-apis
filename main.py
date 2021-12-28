@@ -197,3 +197,102 @@
 
 # Browsable API
 
+# Chapter 3: todoAPI
+
+# Models
+# We update our model ----->
+# 1. make a new migration file
+# 2. sync the database with the changes each time.
+
+# If we update the models in two different apps and then run python manage.py makemigrations
+# the resulting single migration file would contain data ON BOTH APPS!!!
+# That just makes debugging harder.
+# Try to keep your migrations AS SMALL AS POSSIBLE.
+
+# Django REST Framework has a lengthy list of implicitly set default settings.
+# AllowAny means that when we set it explicitly,
+# the effect is exactly the same as if we had no DEFAULT_PERMISSION_CLASSES config set.
+
+# the implicit default settings are designed so that developers can jump in and start working quickly in a local
+# development environment. The default settings ARE NOT appropriate for production.
+
+# here we are just building an API -> we do not need to create any template files or traditional Django views.
+# Instead we will update three files that are Django REST Framework specific to transform our
+# database model into a web API: urls.py, views.py, and serializers.py.
+
+# URLs
+# they are the entry-point for our API endpoints.
+# Just as in a traditional Django project, the urls.py file lets us configure the routing.
+
+# Serializers
+# 1. We started with a traditional Django project and app where we made a database model and added data.
+# 2. we installed Django REST Framework and configured our URLs.
+# 3. Now we need to transform our data, from the models, into JSON that will be outputted at the URLs =>
+#             ----->  we need a serializer  <-----
+
+# Django REST Framework ships with a powerful built-in serializers class that we can quickly extend
+
+# id is created automatically by Django so we didn’t
+# have to define it in our t o d o  model but we will use it in our detail view
+
+# Views
+
+# In traditional Django views are used to customize what data to send to the templates.
+# In Django REST Framework views do the same thing but for our serialized data.
+
+# we have two routes ---> two distinct views.
+
+# We will use ListAPIView to display all todos and RetrieveAPIView to display a single model instance.
+
+# Traditionally consuming an API was a challenge.
+# There simply weren’t good visualizations for all the information contained in the body and header
+# of a given HTTP response or request.
+# Instead most developers used a command line HTTP client like cURL or HTTPie.
+# In 2012, the third-party software product Postman41 was launched and it is now used by millions
+# of developers worldwide who want a visual, feature-rich way to interact with APIs.
+
+# Django REST Framework is that it ships with a powerful browsable API that we can use right away.
+# If you find yourself needing more customization around consuming an API,
+# then tools like Postman are available. But often the built-in browsable API is more than enough.
+
+
+# Browsable API
+
+# CORS (Cross-Origin Resource Sharing)
+
+# Whenever a client interacts with an API hosted on a different domain (mysite.com vs yoursite.com)
+# or port (localhost:3000 vs localhost:8000) there are potential security issues.
+# Specifically, CORS requires the server to include specific HTTP headers that allow for the client
+# to determine if and when cross-domain requests should be allowed.
+
+# Our Django API back-end will communicate with a dedicated front-end that is located on a
+# different port for local development and on a different domain once deployed.
+
+# The easiest way to handle this–-and the one recommended by Django REST Framework
+# is to use middleware that will automatically include the appropriate HTTP headers based on our settings.
+# localhost:3000 ---> default port for React
+
+# Tests
+
+
+# wTodo React Front-end
+
+# the techniques described here will also work with any other popular front-end framework including
+# Vue, Angular, or Ember. They will even work with mobile apps for iOS or Android, desktop
+# apps, or really anything else. The process of connecting to a back-end API is remarkably similar.
+
+# Install Node
+
+# Like pipenv for Python, npm makes managing and installing multiple software packages much simpler.
+
+# start -> mock up the API data in a variable named list which is actually an array with three values.
+# next-> load the list into our component’s state and then use the JavaScript array method to display all the items.
+
+
+# Django REST Framework + React
+
+# the API endpoint listing all todos is at http://127.0.0.1:8000/api/. So we need to issue a GET request to it.
+
+# There are two popular ways to make HTTP requests:
+# with the built-in Fetch API60 or with axios,which comes with several additional features.
+# We will use axios in this example.

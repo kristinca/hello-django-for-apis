@@ -3,8 +3,32 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+    background-color: $color1;
+    background-image: linear-gradient(30deg, #76d7c4 12%, transparent 12.5%, transparent 87%, #76d7c4 87.5%, #76d7c4),
+    linear-gradient(150deg, #76d7c4 12%, transparent 12.5%, transparent 87%, #76d7c4 87.5%, #76d7c4),
+    linear-gradient(30deg, #76d7c4 12%, transparent 12.5%, transparent 87%, #76d7c4 87.5%, #76d7c4),
+    linear-gradient(150deg, #76d7c4 12%, transparent 12.5%, transparent 87%, #76d7c4 87.5%, #76d7c4),
+    linear-gradient(60deg, #d5eaf0 25%, transparent 25.5%, transparent 75%, #d5eaf0 75%, #d5eaf0),
+    linear-gradient(60deg, #d5eaf0 25%, transparent 25.5%, transparent 75%, #d5eaf0 75%, #d5eaf0);
+    background-size:40px 70px;
+    background-position: 0 0, 0 0, 20px 35px, 20px 35px, 0 0, 20px 35px;
+    padding: 40px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 18px;
+  font-weight: bold;
+  font-smoothing: auto;
+}
+
+$color2-1: #fff;
+
+body1 {
+    background-color:##76d7c4;
+    background-image:
+    radial-gradient($color2-1 9px, transparent 10px),
+    repeating-radial-gradient($color2-1 0, $color2-1 4px, transparent 5px, transparent 20px, $color2-1 21px, $color2-1 25px, transparent 26px, transparent 50px);
+    background-size: 30px 30px, 90px 90px;
+    background-position: 0 0;
 }
 
 code {

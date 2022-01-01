@@ -296,3 +296,37 @@
 # There are two popular ways to make HTTP requests:
 # with the built-in Fetch API60 or with axios,which comes with several additional features.
 # We will use axios in this example.
+
+
+# Blog API
+
+# our API endpoints will support CRUD from the beginning which Django REST Framework makes quite seamless to do.
+# Our database model will have five fields: author, title, body, created_at, and updated_at.
+# We can use Django’s built-in User model.
+
+# Django REST Framework takes care of the heavy lifting of transforming our database models into a RESTful API.
+# There are three main steps to this process:
+#    1. urls.py file for the URL routes
+#    2. serializers.py file to transform the data into JSON
+#    3. views.py file to apply logic to each API endpoint .
+
+# start with the URL routes for the actual location of the endpoints:
+# ---> Update the project-level urls.py file ->>> a new api/v1/ route for our posts app.
+
+# It is a good practice to always version your APIs—v1/, v2/, etc —since when you make a large
+# change there may be some lag time before various consumers of the API can also update.
+# That way you can support a v1 of an API for a period of time while also launching a new, updated v2
+# and avoid breaking other apps that rely on your API back-end.
+
+# Our only app at this point is posts we can include it directly here.
+# For multiple apps in a project --> create a dedicated api app and then include all the other API url routes into it.
+
+# The serializer not only transforms data into JSON, it can also specify which fields to include or exclude.
+# In our case, we will include the id field Django automatically adds to database models
+# but we will exclude the updated_at field by not including it in our fields.
+
+# An underlying database model will have far more fields than what needs to be exposed.
+# Django REST Framework’s powerful serializer class makes it extremely straightforward to control this.
+
+# to radically change the behavior of a given API endpoint, all we have to do is UPDATE OUR GENERIC VIEW.
+# This is the advantage of using a full-featured framework like Django REST Framework.

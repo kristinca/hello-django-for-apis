@@ -330,3 +330,47 @@
 
 # to radically change the behavior of a given API endpoint, all we have to do is UPDATE OUR GENERIC VIEW.
 # This is the advantage of using a full-featured framework like Django REST Framework.
+
+
+# Permissions
+
+# Create a new user
+
+# add log in to the browsable API
+# Django REST Framework has a one-line setting to add log in and log out directly to the browsable API itself.
+# Within the project-level urls.py file, add a new URL route that includes rest_framework.urls.
+# The actual route specified can be anything we want; what matters is that rest_framework.urls is included somewhere.
+
+# View-Level Permissions
+# restrict API access to authenticated users. There are multiple places we could do this:
+#    ---->>> project-level, view-level, or object-level <<<-----
+# Adding a dedicated permission_classes to each view seems REPETITIVE
+# if we want to set the same permissions setting across our entire API.
+
+# Project-Level Permissions
+# a much simpler and safer approach to set a strict permissions policy at the project-level
+# and loosen it as needed at the view level.
+# Django REST Framework ships with a number of built-in project-level permissions settings we can use, including:
+# • AllowAny - any user, authenticated or not, has full access
+# • IsAuthenticated - only authenticated, registered users have access
+# • IsAdminUser - only admins/superusers have access
+# • IsAuthenticatedOrReadOnly - unauthorized users can view any page, but only authenticated
+# users have write, edit, or delete privileges
+
+# Implementing any of these four settings requires updating the DEFAULT_PERMISSION_CLASSES
+# setting and refreshing our web browser.
+
+# We have now required all users to authenticate before they can access the API, but we can always
+# make additional view-level changes as needed, too.
+
+# Custom permissions
+
+# We want only the author of a specific blog post to be able to edit or delete it; otherwise the
+# blog post should be read-only. So the superuser account should have full CRUD access to the
+# individual blog instance, but the regular user testuser should not.
+
+# Internally, Django REST Framework relies on a BasePermission class from which all other permission
+# classes inherit. That means the built-in permissions settings like AllowAny, IsAuthenticated,
+# and others extend it.
+
+#

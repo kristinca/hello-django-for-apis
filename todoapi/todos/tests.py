@@ -5,13 +5,13 @@ class TodoModelTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        Todo.objects.create(title='first todo', body='a body here')
+        Todo.objects.create(title='first todoapi', body='a body here')
 
     def test_title_content(self):
         todo = Todo.objects.get(id=1)
 
         expected_object_name = f'{todo.title}'
-        self.assertEqual(expected_object_name, 'first todo')
+        self.assertEqual(expected_object_name, 'first todoapi')
 
     def test_body_content(self):
         todo = Todo.objects.get(id=1)

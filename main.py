@@ -373,4 +373,105 @@
 # classes inherit. That means the built-in permissions settings like AllowAny, IsAuthenticated,
 # and others extend it.
 
+
+# User Authentication
+
+# authentication -the process by which a user can register for a new account, log in with it, and log out.
+# HTTP is a stateless protocol so there is no built-in way to remember if a user is
+# authenticated from one request to the next. Each time a user requests a restricted resource it must verify itself.
+
+# Django REST Framework ships with four different built-in authentication options:
+# basic, session, token, and default.
+# + there are many more third-party packages that offer additional features like JSON Web Tokens (JWTs).
+
+# Basic Authentication
+# 1. Client makes an HTTP request
+# 2. Server responds with an HTTP response containing a 401 (Unauthorized) status code
+#    and WWW-Authenticate HTTP header with details on how to authorize
+# 3. Client sends credentials back via the Authorization HTTP header
+# 4. Server checks credentials and responds with either 200 OK or 403 Forbidden status code
+
+# the authorization credentials sent are the unencrypted base64 encoded77 version of <username>:<password>.
+# advantage ----> simplicity
+# disatvantages --> on every single request the server must look up and verify the username and password (inefficient)
+# ----->user credentials are being passed in clear text—not encrypted at all—over the internet ->>> INSECURE
+# basic authentication should only be used via HTTPS, the secure version of HTTP.
+
+# Monolithic websites, like traditional Django, have long used an alternative authentication scheme
+# that is a combination of sessions and cookies - stateful approach because a record must be kept and maintained
+# on both the server (the session object) and the client (the session ID):
+# 1. A user enters their log in credentials (typically username/password)
+# 2. The server verifies the credentials are correct and generates a session object that is then
+# stored in the database
+# 3. The server sends the client a session ID—not the session object itself—which is stored as a
+# cookie on the browser
+# 4. On all future requests the session ID is included as an HTTP header and, if verified by the
+# database, the request proceeds
+# 5. Once a user logs out of an application, the session ID is destroyed by both the client and server
+# 6. If the user later logs in again, a new session ID is generated and stored as a cookie on the client.
+
+# The default setting in Django REST Framework is a combination of Basic Authentication and Session Authentication.
+
+# The advantage of this approach is that it is more secure ---> user credentials are only sent once,
+# not on every request/response cycle as in Basic Authentication;
+# ---> It is also more efficient : the server does not have to verify the user’s credentials each time,
+# it just matches the session ID to the session object which is a fast look up.
+
+# disadvantages:
+# 1.a session ID is only valid within the browser where log in was performed;
+# it will not work across multiple domains. This is an obvious problem when
+# an API needs to support multiple front-ends such as a website and a mobile app.
+# 2. session object must be kept up-to-date which can be challenging in large sites with multiple
+# servers. How do you maintain the accuracy of a session object across each server?
+# 3. the cookie is sent out for every single request, even those that don’t require authentication ---> inefficient.
+
+
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# DO NOT USE a session-based authentication scheme for any API that will have multiple front-ends.
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+# Token Authentication
+# Token-based authentication is stateless:
+# 1. a client sends the initial user credentials to the server
+# 2. a unique token is generated and then stored by the client as either a cookie or in local storage
+# 3.this token is then passed in the header of each incoming HTTP request
+# 4. the server uses it to verify that a user is authenticated. The server itself does not keep a record of the user,
+# just whether a token is valid or not.
+
+# Cookies vs localStorage
+# Cookies are used for reading server-side information. They are smaller (4KB) in size and automatically
+# sent with each HTTP request.
+# LocalStorage is designed for client-side information. It is much larger (5120KB)
+# and its contents are not sent by default with each HTTP request.
+
+# Tokens stored in both cookies and localStorage are vulnerable to XSS attacks.
+# The current best practice is to store tokens in a cookie with the httpOnly and Secure cookie flags.
+
+# benefits: tokens are stored on the client,
+# scaling the servers to maintain up-to-date session objects is no longer an issue.
+# +++ tokens can be shared amongst multiple front-ends: the same token can represent a user on the website
+# and the same user on a mobile app.
+# The same session ID can not be shared amongst different front-ends, a major limitation.
+
+# downside: tokens can grow quite large. A TOKEN CONTAINS ALL USER INFORMATION,
+# not just an id as with a session id/session object set up. Since the token is sent on every request,
+# managing its size can become a performance issue.
+
+# HOW the token is implemented can vary.
+# Django REST Frameworks’ User Authentication built-in TokenAuthentication80 is deliberately quite basic:
+# 1. it does not support setting tokens to expire -- a security improvement that can be added.
+# 2. It only generates one token per user, so a user on a website and then later a mobile app will use the same token.
+# Since information about the user is stored locally,
+# this can cause problems with maintaining and updating two sets of client information.
+
+# JSON Web Tokens (JWTs)
+# --> a new, enhanced version of tokens that can be added to Django REST Framework via several third-party packages.
+# ----> have several benefits including the ability to generate unique client tokens and token expiration.
+# ---> They can either be generated on the server or with a third-party service like Auth.
+# ----> JWTs can be encrypted which makes them safer to send over unsecured HTTP connections.
+
+# the safest bet for most web APIs is to use a token-based authentication scheme.
+# JWTs are a nice, modern addition though they require additional configuration.
+
 #

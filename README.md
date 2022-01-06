@@ -3,15 +3,16 @@ My notes and work from the book 'Django for APIs Build web APIs with Python and 
 
 # Todo api:
  
-![Image](https://github.com/kristinca/hello-django-for-apis/blob/main/todo/reactfrontend1.png)
+![Image](https://github.com/kristinca/hello-django-for-apis/blob/main/todoapi/reactfrontend1.png)
 
-![Image](https://github.com/kristinca/hello-django-for-apis/blob/main/todo/djangorestbackend1.png)
+![Image](https://github.com/kristinca/hello-django-for-apis/blob/main/todoapi/djangorestbackend1.png)
 
 # Blog api:
++ Permissions
 
-![Image](https://github.com/kristinca/hello-django-for-apis/blob/main/blogapi/blogapi1.png)
+![Image](https://github.com/kristinca/hello-django-for-apis/blob/main/blogapi/blogapi_logged_in1.png)
 
-![Image](https://github.com/kristinca/hello-django-for-apis/blob/main/blogapi/blogapi2.png)
+![Image](https://github.com/kristinca/hello-django-for-apis/blob/main/blogapi/blogapi_logged_in2.png)
 
 ![Image](https://github.com/kristinca/hello-django-for-apis/blob/main/blogapi/blogapi_logged_out.png)
 

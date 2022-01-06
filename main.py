@@ -511,3 +511,36 @@
 #  ---> add a new URL route for registration.
 
 # Tokens
+
+
+# Viewsets and Routers
+# can speed-up API development. They are an additional layer of abstraction on top of views and URLs.
+# The primary benefit is that a single viewset can replace multiple related views.
+# A router can automatically generate URLs for the developer.
+# In larger projects with many endpoints this means a developer has to write less code.
+
+# User endpoints
+
+# Traditional Django has a built-in User model class that we have already used in the previous
+# chapter for authentication. So we do not need to create a new database model. Instead we just
+# need to wire up new endpoints:
+# 1. new serializer class for the model
+# 2. new views for each endpoint
+# 3. new URL routes for each endpoint.
+
+# there are three different ways to reference the User model in Django.
+#URL routes -> Make sure to import our new UserList, and UserDetail views.
+# Then we can use the prefix users/ for each.
+
+# Viewsets
+# A viewset is a way to combine the logic for multiple related views into a single class.
+# One viewset can replace multiple views.
+
+# Routers
+# work directly with viewsets to automatically generate URL patterns for us.
+# adopt a single route for each viewset. So two routes instead of four URL patterns.
+
+# Django REST Framework has two default routers: SimpleRouter95 and DefaultRouter. We will
+# use SimpleRouter but it’s also possible to create custom routers for more advanced functionality.
+
+#

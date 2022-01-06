@@ -474,4 +474,40 @@
 # the safest bet for most web APIs is to use a token-based authentication scheme.
 # JWTs are a nice, modern addition though they require additional configuration.
 
-#
+# Default Authentication
+# use both methods -> they serve different purposes.
+# Sessions are used to power the Browsable API and the ability to log in and log out of it.
+# BasicAuthentication is used to pass the session ID in the HTTP headers for the API itself.
+
+# Implementing token authentication
+# We keep SessionAuthentication since we still need it for our Browsable API, but now use tokens
+# to pass authentication credentials back and forth in our HTTP headers. We also need to add the
+# authtoken app which generates the tokens on the server. It comes included with Django REST Framework
+
+# the tokens are only generated after there is an API call for a user to log in.
+
+# Endpoints
+# we will use dj-rest-auth83 in combination with django-allauth to simplify things.
+
+# dj-rest-auth
+
+# User Registration
+# user registration = sign up endpoint
+# Traditional Django does not ship with builtin views or URLs for user registration
+# and neither does Django REST Framework.
+
+# the third-party package django-allauth comes with user registration + a number of additional features
+# to the Django auth system such as socialauthentication via Facebook, Google, Twitter, etc.
+# we add dj_rest_auth.registration from the dj-rest-auth package --> we have user registration endpoints
+
+# The email back-end config is needed since by default an email will be sent when a new user is registered,
+# asking them to confirm their account. Rather than also set up an email server, we will
+# output the emails to the console with the console.EmailBackend setting.
+
+# SITE_ID is part of the built-in Django “sites” framework, which is a way to host multiple
+# websites from the same Django project.
+
+# added new apps ---->>> update the database <<<-----
+#  ---> add a new URL route for registration.
+
+# Tokens

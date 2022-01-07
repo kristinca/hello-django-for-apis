@@ -543,4 +543,30 @@
 # Django REST Framework has two default routers: SimpleRouter95 and DefaultRouter. We will
 # use SimpleRouter but it’s also possible to create custom routers for more advanced functionality.
 
+# Schemas and Documentation
+# A schema is a machine-readable document that outlines all available API endpoints, URLs, and
+# the HTTP verbs (GET, POST, PUT, DELETE, etc.) they support.
+# Documentation is something added to a schema that makes it easier for humans to read and consume.
+
+# Schemas
+# Before version 3.9, Django REST Framework relied on Core API for schemas
+# now: OpenAPI schema (formerly known as Swagger).
+
+# PyYAML will transform our schema into the YAML-basd OpenAPI format;
+# uritemplate adds parameters to the URL paths.
+
+# If your API does not change often, the STATIC SCHEMA can be generated periodically and served from static
+# files for strong performance.
+# if your API does change quite often -> DYNAMIC SCHEMA.
+
+# static schema approach uses the generateschema management command
+
+# dynamic approach: update config/urls.py by importing get_schema_view at the top creating a dedicated path at openapi.
+
+
+# Documentation
+# Django REST Framework also comes with a built-in API documentation feature that translates
+# schema into a much friendlier format.
+# popular approaches: using SwaggerUI, ReDoc, thid-party party drf-yasg package.
+
 #
